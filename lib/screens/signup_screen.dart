@@ -10,6 +10,7 @@ class SignupScreen extends StatefulWidget {
 class _SignupScreenState extends State<SignupScreen> {
   var _signinFormKey = GlobalKey<FormState>();
   TextEditingController _nameController = TextEditingController();
+  TextEditingController _addressController = TextEditingController();
   TextEditingController _numberController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
   var _isLoading = false;
@@ -46,6 +47,12 @@ class _SignupScreenState extends State<SignupScreen> {
                 LabelTextFormField(
                   labelText: "Name",
                   controller: _nameController,
+                ),
+
+                //Name
+                LabelTextFormField(
+                  labelText: "Address",
+                  controller: _addressController,
                 ),
 
                 //Phone Number

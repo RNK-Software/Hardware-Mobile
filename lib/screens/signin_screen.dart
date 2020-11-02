@@ -78,7 +78,7 @@ class _SigninScreenState extends State<SigninScreen> {
                         ),
                         onPressed: () {
                           if (_signinFormKey.currentState.validate()) {
-                            // _signIn();
+                            Navigator.pushNamed(context, '/home');
                           }
                         },
                       ),

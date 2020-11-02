@@ -132,7 +132,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                         textScaleFactor: 1.5,
                       ),
                       onPressed: () {
-                        //verify function
+                        Navigator.pushNamed(context, '/home');
                       },
                     ),
                   ),
