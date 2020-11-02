@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import '../widgets/label_text_form_field.dart';
 
-class SigninScreen extends StatefulWidget {
+class SignupScreen extends StatefulWidget {
   @override
-  _SigninScreenState createState() => _SigninScreenState();
+  _SignupScreenState createState() => _SignupScreenState();
 }
 
-class _SigninScreenState extends State<SigninScreen> {
+class _SignupScreenState extends State<SignupScreen> {
   var _signinFormKey = GlobalKey<FormState>();
+  TextEditingController _nameController = TextEditingController();
   TextEditingController _numberController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
   var _isLoading = false;
@@ -21,7 +22,7 @@ class _SigninScreenState extends State<SigninScreen> {
     AssetImage assetImage = AssetImage('asset/images/signin.png');
     Image image = Image(
       image: assetImage,
-      width: screenWidth * 0.5,
+      width: screenWidth * 0.4,
     );
     return Scaffold(
       body: Builder(
@@ -39,6 +40,12 @@ class _SigninScreenState extends State<SigninScreen> {
                 ),
                 Container(
                   height: 30,
+                ),
+
+                //Name
+                LabelTextFormField(
+                  labelText: "Name",
+                  controller: _nameController,
                 ),
 
                 //Phone Number
@@ -73,7 +80,7 @@ class _SigninScreenState extends State<SigninScreen> {
                         color: Theme.of(context).primaryColor,
                         textColor: Colors.white,
                         child: Text(
-                          'Sign In',
+                          'Sign Up',
                           textScaleFactor: 1.5,
                         ),
                         onPressed: () {
@@ -87,26 +94,14 @@ class _SigninScreenState extends State<SigninScreen> {
                 Container(
                   margin: EdgeInsets.symmetric(
                       horizontal: screenWidth * 0.1, vertical: 8.0),
-                  child: Center(
-                    child: Text(
-                      "Don't have an account?",
-                      style: TextStyle(fontSize: 18, color: Colors.grey),
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.symmetric(
-                      horizontal: screenWidth * 0.1, vertical: 8.0),
                   child: GestureDetector(
                     onTap: () {
-                      Navigator.pushNamed(context, '/signup');
+                      Navigator.pushNamed(context, '/signin');
                     },
                     child: Center(
                       child: Text(
-                        "Sign Up",
-                        style: TextStyle(
-                            fontSize: 20,
-                            color: Theme.of(context).primaryColor),
+                        "Go back to Log In Screen",
+                        style: TextStyle(fontSize: 18, color: Colors.grey),
                       ),
                     ),
                   ),

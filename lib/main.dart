@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import './screens/signin_screen.dart';
+import './screens/signup_screen.dart';
 
 void main() => runApp(new MyApp());
 class MyApp extends StatelessWidget {
@@ -18,8 +19,8 @@ class MyApp extends StatelessWidget {
         accentColor: Colors.white,
       ),
       routes: {
-        // '/register': (context) => Register(),
-        // '/homescreen': (context) => HomeScreen(),
+        '/signin': (context) => SigninScreen(),
+        '/signup': (context) => SignupScreen(),
         // '/login': (context) => Login()
       },
     );
