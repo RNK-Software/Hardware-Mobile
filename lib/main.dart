@@ -5,6 +5,9 @@ import './screens/verify_screen.dart';
 import './screens/home_screen.dart';
 import './screens/category_screen.dart';
 import './screens/detail_screen.dart';
+import './screens/cart_screen.dart';
+import './screens/order_screen.dart';
+import './screens/profile_screen.dart';
 
 void main() => runApp(new MyApp());
 class MyApp extends StatelessWidget {
@@ -29,6 +32,9 @@ class MyApp extends StatelessWidget {
         '/home': (context) => HomeScreen(),
         '/category': (context) => CategoryScreen(),
         '/detail': (context) => DetailScreen(),
+        '/cart': (context) => CartScreen(),
+        '/order': (context) => OrderScreen(),
+        '/profile': (context) => ProfileScreen(),
       },
     );
   }

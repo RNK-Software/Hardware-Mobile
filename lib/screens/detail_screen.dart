@@ -31,7 +31,7 @@ class _DetailScreenState extends State<DetailScreen> {
     return Scaffold(
       appBar: AppBar(
         // backgroundColor: Colors.transparent,
-        title: Text("Safe Check In"),
+        title: Text("Hammer"),
         backgroundColor: Colors.grey[300],
       ),
       body: Padding(
@@ -87,6 +87,7 @@ class _DetailScreenState extends State<DetailScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
                           FloatingActionButton(
+                            heroTag: "btn1",
                             onPressed: add,
                             child: Icon(Icons.add, color: Colors.black,),
                             backgroundColor: Theme.of(context).primaryColor,),
@@ -95,6 +96,7 @@ class _DetailScreenState extends State<DetailScreen> {
                               style: TextStyle(fontSize: 40.0)),
                           Container(width: 8,),
                           FloatingActionButton(
+                            heroTag: "btn2",
                             onPressed: minus,
                             child: Icon(Icons.minimize, color: Colors.black,),
                             backgroundColor: Theme.of(context).primaryColor,),

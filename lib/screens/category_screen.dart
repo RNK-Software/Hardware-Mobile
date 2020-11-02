@@ -15,7 +15,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
 
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.transparent,
+          backgroundColor: Colors.grey[300],
           elevation: 0,
           title: TextField(
             onChanged: (value) {
@@ -33,14 +33,28 @@ class _CategoryScreenState extends State<CategoryScreen> {
                 isDense: true,
                 contentPadding: EdgeInsets.all(8)),
           ),
-          iconTheme: new IconThemeData(color: Theme.of(context).primaryColor),
+          iconTheme: new IconThemeData(color: Colors.white),
           actions: <Widget>[
             IconButton(
               icon: Icon(Icons.search),
               onPressed: () {
                 //search
               },
-              color: Theme.of(context).primaryColor,
+              color: Colors.white,
+            ),
+            IconButton(
+              icon: Icon(Icons.shopping_cart),
+              onPressed: () {
+                Navigator.pushNamed(context, '/cart');
+              },
+              color: Colors.white,
+            ),
+            IconButton(
+              icon: Icon(Icons.person),
+              onPressed: () {
+                Navigator.pushNamed(context, '/profile');
+              },
+              color: Colors.white,
             ),
           ],
         ),
