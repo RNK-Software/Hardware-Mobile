@@ -49,7 +49,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
           children: List.generate(20, (index) {
             return GestureDetector(
               onTap: () {
-                print("clikooo");
+                Navigator.pushNamed(context, '/detail');
               },
               child: Card(
                 child: Container(
