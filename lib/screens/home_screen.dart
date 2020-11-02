@@ -43,7 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     title: Text("Category", //data.name[index]
                         style: TextStyle(color: Colors.black, fontSize: 16)),
                     onTap: () {
-                      Navigator.pushNamed(context, '/detail');
+                      Navigator.pushNamed(context, '/category');
                     },
                   ),
                 );
