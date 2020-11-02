@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import './screens/signin_screen.dart';
 import './screens/signup_screen.dart';
+import './screens/verify_screen.dart';
 
 void main() => runApp(new MyApp());
 class MyApp extends StatelessWidget {
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/signin': (context) => SigninScreen(),
         '/signup': (context) => SignupScreen(),
+        '/verify': (context) => VerificationScreen(),
         // '/login': (context) => Login()
       },
     );

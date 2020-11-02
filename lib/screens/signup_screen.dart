@@ -85,7 +85,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         ),
                         onPressed: () {
                           if (_signinFormKey.currentState.validate()) {
-                            // _signIn();
+                            Navigator.pushNamed(context, '/verify');
                           }
                         },
                       ),
