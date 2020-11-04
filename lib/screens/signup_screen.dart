@@ -20,7 +20,7 @@ class _SignupScreenState extends State<SignupScreen> {
     var _mediaQueryData = MediaQuery.of(context);
     var screenWidth = _mediaQueryData.size.width;
     var screenHeight = _mediaQueryData.size.height;
-    AssetImage assetImage = AssetImage('asset/images/signin.png');
+    AssetImage assetImage = AssetImage('asset/images/signup.png');
     Image image = Image(
       image: assetImage,
       width: screenWidth * 0.4,
@@ -78,9 +78,9 @@ class _SignupScreenState extends State<SignupScreen> {
                 else
                   Container(
                     margin: EdgeInsets.symmetric(
-                        horizontal: screenWidth * 0.18, vertical: 30.0),
+                        horizontal: screenWidth * 0.18, vertical: 10.0),
                     child: ButtonTheme(
-                      height: 50,
+                      height: 30,
                       child: RaisedButton(
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30.0)),
@@ -98,21 +98,6 @@ class _SignupScreenState extends State<SignupScreen> {
                       ),
                     ),
                   ),
-                Container(
-                  margin: EdgeInsets.symmetric(
-                      horizontal: screenWidth * 0.1, vertical: 8.0),
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(context, '/signin');
-                    },
-                    child: Center(
-                      child: Text(
-                        "Go back to Log In Screen",
-                        style: TextStyle(fontSize: 18, color: Colors.grey),
-                      ),
-                    ),
-                  ),
-                ),
               ],
             ),
           ),

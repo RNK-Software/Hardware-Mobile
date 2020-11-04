@@ -78,15 +78,15 @@ class _OrderScreenState extends State<OrderScreen> {
                     margin: EdgeInsets.symmetric(
                         horizontal: screenWidth * 0.18, vertical: 30.0),
                     child: ButtonTheme(
-                      height: 50,
+                      height: 30,
                       child: RaisedButton(
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30.0)),
-                        color: Theme.of(context).primaryColor,
+                        color: Colors.black54,
                         textColor: Colors.white,
                         child: Text(
                           'SUBMIT ORDER',
-                          textScaleFactor: 1.5,
+                          textScaleFactor: 1.3,
                         ),
                         onPressed: () {
                           if (_signinFormKey.currentState.validate()) {

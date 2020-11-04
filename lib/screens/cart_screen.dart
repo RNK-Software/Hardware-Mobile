@@ -21,12 +21,32 @@ class _CartScreenState extends State<CartScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Cart"),
-        backgroundColor: Colors.grey[300],
+        backgroundColor: Colors.transparent,
+        elevation: 500,
+        title: Text(
+          "MY CART",
+          style: TextStyle(color: Colors.black54),
+        ),
+        iconTheme: new IconThemeData(color: Colors.black54),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.home),
+            onPressed: () {
+              Navigator.pushNamed(context, '/shop');
+            },
+          ),
+          IconButton(
+            icon: Icon(Icons.person),
+            onPressed: () {
+              Navigator.pushNamed(context, '/profile');
+            },
+          ),
+        ],
       ),
-      body: ListView(
+      body: Column(
         children: [
           Expanded(
+            flex: 8,
             child: ListView.builder(
               shrinkWrap: true,
               itemCount: 3,
@@ -48,44 +68,41 @@ class _CartScreenState extends State<CartScreen> {
           ),
           Divider(),
           //Name
-
-          ButtonBar(
-            alignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              ButtonTheme(
-                height: 30,
-                minWidth: screenWidth * 0.47,
-                child: RaisedButton(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30.0)),
-                  color: Colors.grey,
-                  textColor: Colors.white,
-                  child: Text(
-                    'Rs 4000', //total
-                    textScaleFactor: 1,
-                  ),
-                  onPressed: () {},
+          Expanded(
+            flex: 1,
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                  flex: 4,
+                  child: Center(child: Text("Total : Rs 500", style: TextStyle(color: Colors.black54, fontSize: 18))),
                 ),
-              ),
-              ButtonTheme(
-                height: 30,
-                minWidth: screenWidth * 0.47,
-                child: RaisedButton(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30.0)),
-                  color: Theme.of(context).primaryColor,
-                  textColor: Colors.white,
-                  child: Text(
-                    'PLACE ORDER',
-                    textScaleFactor: 1,
+                Expanded(
+                  flex: 5,
+                  child: ButtonTheme(
+                    height: 30,
+                    minWidth: screenWidth * 0.47,
+                    child: RaisedButton(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30.0)),
+                      color: Colors.black54,
+                      textColor: Colors.white,
+                      child: Text(
+                        'PLACE ORDER',
+                        textScaleFactor: 1,
+                      ),
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/order');
+                      },
+                    ),
                   ),
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/order');
-                  },
                 ),
-              ),
-            ],
-          ),
+                Expanded(
+                  flex: 1,
+                  child: Container(),
+                ),
+              ],
+            ),
+          )
         ],
       ),
     );

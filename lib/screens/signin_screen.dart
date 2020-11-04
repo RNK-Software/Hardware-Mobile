@@ -21,7 +21,7 @@ class _SigninScreenState extends State<SigninScreen> {
     AssetImage assetImage = AssetImage('asset/images/signin.png');
     Image image = Image(
       image: assetImage,
-      width: screenWidth * 0.5,
+      width: screenWidth * 0.7,
     );
     return Scaffold(
       body: Builder(
@@ -64,9 +64,9 @@ class _SigninScreenState extends State<SigninScreen> {
                 else
                   Container(
                     margin: EdgeInsets.symmetric(
-                        horizontal: screenWidth * 0.18, vertical: 30.0),
+                        horizontal: screenWidth * 0.18, vertical: 10.0),
                     child: ButtonTheme(
-                      height: 50,
+                      height: 30,
                       child: RaisedButton(
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30.0)),
@@ -86,11 +86,11 @@ class _SigninScreenState extends State<SigninScreen> {
                   ),
                 Container(
                   margin: EdgeInsets.symmetric(
-                      horizontal: screenWidth * 0.1, vertical: 8.0),
+                      horizontal: screenWidth * 0.1, vertical: 1.0),
                   child: Center(
                     child: Text(
                       "Don't have an account?",
-                      style: TextStyle(fontSize: 18, color: Colors.grey),
+                      style: TextStyle(fontSize: 12, color: Colors.grey),
                     ),
                   ),
                 ),
@@ -105,7 +105,7 @@ class _SigninScreenState extends State<SigninScreen> {
                       child: Text(
                         "Sign Up",
                         style: TextStyle(
-                            fontSize: 20,
+                            fontSize: 15,
                             color: Theme.of(context).primaryColor),
                       ),
                     ),
