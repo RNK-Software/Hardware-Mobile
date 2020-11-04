@@ -23,7 +23,7 @@ class _OrderScreenState extends State<OrderScreen> {
     AssetImage assetImage = AssetImage('asset/images/signin.png');
     Image image = Image(
       image: assetImage,
-      width: screenWidth * 0.4,
+      width: screenWidth * 0.7,
     );
     return Scaffold(
       body: Builder(
@@ -66,6 +66,11 @@ class _OrderScreenState extends State<OrderScreen> {
                   labelText: "City",
                   controller: _cityController,
                 ),
+
+                Center(
+                  child: Text("[google map here]"),
+                )
+                ,
 
                 //Login button
                 if (_isLoading)

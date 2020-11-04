@@ -54,9 +54,21 @@ class _CartScreenState extends State<CartScreen> {
                 return Card(
                   color: Theme.of(context).accentColor,
                   elevation: 2.0,
+
                   child: ListTile(
                     leading: Text("5", //amount
                         style: TextStyle(color: Colors.black, fontSize: 25)),
+                    trailing: IconButton(
+                      icon: Icon(
+                        Icons.delete_forever,
+                      ),
+                      iconSize: 30,
+                      color: Colors.red,
+                      splashColor: Colors.purple,
+                      onPressed: () {
+                        //Remove it
+                      },
+                    ),
                     title: Text("Hammer", //name
                         style: TextStyle(color: Colors.black, fontSize: 16)),
                     subtitle: Text("Rs 500", //price
