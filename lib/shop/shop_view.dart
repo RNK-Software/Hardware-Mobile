@@ -16,8 +16,8 @@ class ShopView extends ShopViewModel {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: Colors.grey[500],
-        elevation: 0,
+        backgroundColor: Colors.transparent,
+        elevation: 500,
         title: TextField(
           onChanged: (value) {
             setState(() {
@@ -42,21 +42,21 @@ class ShopView extends ShopViewModel {
             onPressed: () {
               //search
             },
-            color: Colors.white,
+            color: Colors.black54,
           ),
           IconButton(
             icon: Icon(Icons.shopping_cart),
             onPressed: () {
               Navigator.pushNamed(context, '/cart');
             },
-            color: Colors.white,
+            color: Colors.black54,
           ),
           IconButton(
             icon: Icon(Icons.person),
             onPressed: () {
               Navigator.pushNamed(context, '/profile');
             },
-            color: Colors.white,
+            color: Colors.black54,
           ),
         ],
       ),
