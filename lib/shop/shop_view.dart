@@ -31,18 +31,22 @@ class ShopView extends ShopViewModel {
     var products = productProvider.getProducts();
     //methana products tika array ekaka save wenawa
     /*
+      me format eken 
+
       products = [
         {
           name: ...,
           imageUrl; ...,
           price: ...,
           description: ...,
+          category: ...
         },
         {
           name: ...,
           imageUrl; ...,
           price: ...,
           description: ...,
+          category: ...,
         },
       ];
 

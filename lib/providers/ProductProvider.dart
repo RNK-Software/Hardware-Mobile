@@ -14,9 +14,10 @@ class ProductProvider with ChangeNotifier {
       responce.documents.forEach((product) {
         loadedProducts.add(ProductModal(
             name: product['name'],
-            imageUrl: product['imageUrl'],
+            imageUrl: product['pictureUrl'],
             description: product['description'],
-            price: product['price']));
+            price: product['price'],
+            category: product['category']));
       });
       _products = loadedProducts;
       notifyListeners();
