@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:hardwaremobile/providers/ProductProvider.dart';
+import 'package:provider/provider.dart';
 
 int _n = 0;
 
@@ -13,6 +15,10 @@ class _DetailScreenState extends State<DetailScreen> {
   Widget build(BuildContext context) {
     var _mediaQueryData = MediaQuery.of(context);
     var screenWidth = _mediaQueryData.size.width;
+
+    final name = ModalRoute.of(context).settings.arguments;
+    var productProvider = Provider.of<ProductProvider>(context);
+    final product = productProvider.getProduct(name);
 
     void add() {
       setState(() {
@@ -31,7 +37,7 @@ class _DetailScreenState extends State<DetailScreen> {
     return Scaffold(
       appBar: AppBar(
         // backgroundColor: Colors.transparent,
-        title: Text("Hammer"),
+        title: Text(product.name),
         backgroundColor: Colors.grey[300],
       ),
       body: Padding(
@@ -43,14 +49,12 @@ class _DetailScreenState extends State<DetailScreen> {
               Container(
                 height: 20,
               ),
-              Image.network(
-                'https://www.qy1.de/img/japanischer-klauenhammer-313410.jpg',
-              ),
+              Image.network(product.imageUrl),
               Container(
                 height: 20,
               ),
               Center(
-                child: Text('Hammer', //Name
+                child: Text(product.name, //Name
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
@@ -58,8 +62,7 @@ class _DetailScreenState extends State<DetailScreen> {
                         fontSize: 25)),
               ),
               Center(
-                child: Text(
-                    'Description is the pattern of narrative development that aims to make vivid a place, object, character, or group. Description is one of four rhetorical modes, along with exposition, argumentation, and narration. In practice it would be difficult to write literature that drew on just one of the four basic modes.',
+                child: Text(product.description,
                     textAlign: TextAlign.center,
                     style: TextStyle(color: Colors.black54, fontSize: 15)),
               ),
@@ -67,7 +70,7 @@ class _DetailScreenState extends State<DetailScreen> {
                 height: 20,
               ),
               Center(
-                child: Text('Rs 500', //Price
+                child: Text("Rs.${product.price}", //Price
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
@@ -97,9 +100,9 @@ class _DetailScreenState extends State<DetailScreen> {
                               ),
                               backgroundColor: Colors.grey,
                             ),
-
-                            Text('$_n', style: TextStyle(fontSize: 40.0, color: Colors.grey)),
-
+                            Text('$_n',
+                                style: TextStyle(
+                                    fontSize: 40.0, color: Colors.grey)),
                             FloatingActionButton(
                               heroTag: "btn2",
                               onPressed: minus,

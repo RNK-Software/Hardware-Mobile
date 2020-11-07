@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:hardwaremobile/providers/ProductProvider.dart';
 import 'package:provider/provider.dart';
 
-import './shop_view_model.dart';
+import '../modals/product_view_model.dart';
 import 'state/tabbar_change.dart';
 import 'widget/shop_card.dart';
 
-class ShopView extends ShopViewModel {
+class ShopView extends ProductViewModel {
   var _isLoading = false;
+  var isLoaded = false;
   @override
   void initState() {
     setState(() {
@@ -16,19 +17,22 @@ class ShopView extends ShopViewModel {
     Future.delayed(Duration.zero).then((_) => {
           Provider.of<ProductProvider>(context, listen: false)
               .fetchProducts()
-              .then((_) => {
-                    setState(() {
-                      _isLoading = false;
-                    })
-                  })
+              .then((_) {
+            setState(() {
+              _isLoading = false;
+            });
+          })
         });
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    var productProvider = Provider.of<ProductProvider>(context);
-    var products = productProvider.getProducts();
+    //print(shopList[0]);
+    //var productProvider = Provider.of<ProductProvider>(context);
+    //var products = productProvider.getProducts();
+    //print(products);
+
     //methana products tika array ekaka save wenawa
     /*
       me format eken 
@@ -98,11 +102,64 @@ class ShopView extends ShopViewModel {
           ),
         ],
       ),
-      body: buildChangeBody(),
+      body: _isLoading
+          ? Center(
+              child: CircularProgressIndicator(
+                backgroundColor: Colors.purple,
+              ),
+            )
+          : ChangeNotifierProvider.value(
+              value: tabBarNotifier,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Expanded(
+                      flex: 1,
+                      child: Consumer<TabBarChange>(
+                        builder: (context, value, child) => ListView.builder(
+                          itemCount: productList.length,
+                          controller: headerScrollController,
+                          padding: EdgeInsets.all(10),
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) => Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 5),
+                            child: RaisedButton(
+                              color: tabBarNotifier.index == index
+                                  ? Theme.of(context).accentColor
+                                  : Colors.grey[300],
+                              onPressed: () => headerListChangePosition(index),
+                              child: Text("${productList[index].categoryName}"),
+                            ),
+                          ),
+                        ),
+                      )),
+                  Divider(),
+                  Expanded(
+                      flex: 9,
+                      child: ListView.builder(
+                        controller: scrollController,
+                        itemCount: productList.length + 1,
+                        itemBuilder: (context, index) {
+                          print(index);
+                          if (index == productList.length)
+                            return Container(height: oneItemHeight * 2);
+                          else
+                            return ShopCard(
+                              model: productList[index],
+                              index: index,
+                              onHeight: (val) {
+                                fillListPositionValues(val);
+                              },
+                            );
+                        },
+                      )),
+                ],
+              ),
+            ),
     );
   }
 
-  ChangeNotifierProvider<TabBarChange> buildChangeBody() {
+  /*ChangeNotifierProvider<TabBarChange> buildChangeBody() {
     return ChangeNotifierProvider.value(
       value: tabBarNotifier,
       child: Column(
@@ -145,7 +202,7 @@ class ShopView extends ShopViewModel {
   Widget get buildListViewHeader {
     return Consumer<TabBarChange>(
       builder: (context, value, child) => ListView.builder(
-        itemCount: shopList.length,
+        itemCount: products.length,
         controller: headerScrollController,
         padding: EdgeInsets.all(10),
         scrollDirection: Axis.horizontal,
@@ -162,8 +219,8 @@ class ShopView extends ShopViewModel {
             ? Theme.of(context).accentColor
             : Colors.grey[300],
         onPressed: () => headerListChangePosition(index),
-        child: Text("${shopList[index].categoryName} $index"),
+        child: Text("${products[index].category}"),
       ),
     );
-  }
+  }*/
 }

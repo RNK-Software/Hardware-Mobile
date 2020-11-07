@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:hardwaremobile/modals/product.dart';
+import 'package:hardwaremobile/modals/product_model.dart';
 import '../model/shop_helper.dart';
 import '../model/shop_model.dart';
 
 class ShopCard extends StatelessWidget {
-  final ShopModel model;
+  final ProductModel model;
   final int index;
   final Function(double val) onHeight;
 
@@ -18,7 +20,7 @@ class ShopCard extends StatelessWidget {
     return Column(
       children: [
         Divider(),
-        Text("${model.categoryName} $index"),
+        Text("${model.categoryName}"),
         Card(
           child: buildGridViewProducts(index, model.products),
         ),
@@ -26,7 +28,7 @@ class ShopCard extends StatelessWidget {
     );
   }
 
-  GridView buildGridViewProducts(int index, List<Product> products) {
+  GridView buildGridViewProducts(int index, List<ProductModal> products) {
     return GridView.builder(
       physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
@@ -34,23 +36,31 @@ class ShopCard extends StatelessWidget {
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: ShopHelper.GRID_COLUMN_VALUE),
       itemBuilder: (context, index) {
-        return  GestureDetector(
+        return GestureDetector(
           onTap: () {
-            Navigator.pushNamed(context, '/detail');
+            Navigator.pushNamed(context, '/detail',
+                arguments: products[index].name);
           },
           child: Card(
             child: Container(
               decoration: BoxDecoration(
                   image: DecorationImage(
                       image: NetworkImage(
-                          "https://thumbs.dreamstime.com/b/red-hammer-white-background-isolated-34702875.jpg"), //products[index].image
+                          products[index].imageUrl), //products[index].image
                       fit: BoxFit.cover)),
-              child: Text(products[index].name+"\nRs 500",),
+              child: Column(
+                children: [
+                  Text(
+                    products[index].name,
+                  ),
+                  Text(
+                    "Rs.${products[index].price}",
+                  ),
+                ],
+              ),
             ),
-
           ),
         );
-
       },
     );
   }
