@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:hardwaremobile/shop/shop.dart';
 import '../widgets/label_text_form_field.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class SigninScreen extends StatefulWidget {
   @override
@@ -11,7 +13,74 @@ class _SigninScreenState extends State<SigninScreen> {
   var _signinFormKey = GlobalKey<FormState>();
   TextEditingController _numberController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
+  TextEditingController _codeController = TextEditingController();
+
   var _isLoading = false;
+
+  Future<void> handleSignin(BuildContext context) async {
+    FirebaseAuth auth = FirebaseAuth.instance;
+    await auth.verifyPhoneNumber(
+        phoneNumber: _numberController.text.trim(),
+        verificationCompleted: (AuthCredential authCredential) {
+          auth
+              .signInWithCredential(authCredential)
+              .then((AuthResult result) => {
+                    Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (context) => Shop()))
+                  })
+              .catchError((e) {
+            print(e);
+          });
+        },
+        codeSent: (String verificationId, [int forceResendingToken]) {
+          showDialog(
+              context: context,
+              barrierDismissible: false,
+              builder: (context) => AlertDialog(
+                    title: Text("Enter OTP Code"),
+                    content: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        TextField(
+                          controller: _codeController,
+                        )
+                      ],
+                    ),
+                    actions: <Widget>[
+                      FlatButton(
+                        onPressed: () {
+                          FirebaseAuth auth = FirebaseAuth.instance;
+                          var _smsCode = _codeController.text.trim();
+                          var _credential = PhoneAuthProvider.getCredential(
+                              verificationId: verificationId,
+                              smsCode: _smsCode);
+                          auth
+                              .signInWithCredential(_credential)
+                              .then((AuthResult result) => {
+                                    Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => Shop()))
+                                  })
+                              .catchError((e) {
+                            print(e);
+                          });
+                        },
+                        child: Text("Done"),
+                      )
+                    ],
+                  ));
+        },
+        timeout: Duration(seconds: 60),
+        verificationFailed: (AuthException e) {
+          print(e.message);
+        },
+        codeAutoRetrievalTimeout: (String verificationId) {
+          verificationId = verificationId;
+          print(verificationId);
+          print("Timout");
+        });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,20 +109,13 @@ class _SigninScreenState extends State<SigninScreen> {
                 Container(
                   height: 30,
                 ),
-
                 //Phone Number
                 LabelTextFormField(
                   labelText: "Phone Number",
                   controller: _numberController,
-                  keyboardType: TextInputType.number,
+                  keyboardType: TextInputType.phone,
                 ),
-
-                //Password
-                LabelTextFormField(
-                  labelText: "Password",
-                  controller: _passwordController,
-                  isObscure: true,
-                ),
+                Center(child: Text("Eg: +94711234567")),
 
                 //Login button
                 if (_isLoading)
@@ -78,39 +140,13 @@ class _SigninScreenState extends State<SigninScreen> {
                         ),
                         onPressed: () {
                           if (_signinFormKey.currentState.validate()) {
-                            Navigator.pushNamed(context, '/shop');
+                            //Navigator.pushNamed(context, '/shop');
+                            handleSignin(context);
                           }
                         },
                       ),
                     ),
                   ),
-                Container(
-                  margin: EdgeInsets.symmetric(
-                      horizontal: screenWidth * 0.1, vertical: 1.0),
-                  child: Center(
-                    child: Text(
-                      "Don't have an account?",
-                      style: TextStyle(fontSize: 12, color: Colors.grey),
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.symmetric(
-                      horizontal: screenWidth * 0.1, vertical: 8.0),
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(context, '/signup');
-                    },
-                    child: Center(
-                      child: Text(
-                        "Sign Up",
-                        style: TextStyle(
-                            fontSize: 15,
-                            color: Theme.of(context).primaryColor),
-                      ),
-                    ),
-                  ),
-                ),
               ],
             ),
           ),

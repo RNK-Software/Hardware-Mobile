@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "789140374767",
+    "firebase_url": "https://hardware-37301.firebaseio.com",
+    "project_id": "hardware-37301",
+    "storage_bucket": "hardware-37301.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:789140374767:android:794fb1b35605ce26e7471a",
+        "android_client_info": {
+          "package_name": "com.rnksoftware.hardware"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "789140374767-d4vqb1tr28kcpg1l0u2n5637qbmtt6of.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyACGkWj26d4-Fomoi3MTNNBY0avWd3c-cQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "789140374767-d4vqb1tr28kcpg1l0u2n5637qbmtt6of.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
