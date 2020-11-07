@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hardwaremobile/providers/ProductProvider.dart';
+import 'package:hardwaremobile/providers/UserProvider.dart';
 import 'package:provider/provider.dart';
 
 import '../modals/product_view_model.dart';
@@ -14,48 +15,25 @@ class ShopView extends ProductViewModel {
     setState(() {
       _isLoading = true;
     });
-    Future.delayed(Duration.zero).then((_) => {
-          Provider.of<ProductProvider>(context, listen: false)
-              .fetchProducts()
-              .then((_) {
-            setState(() {
-              _isLoading = false;
-            });
-          })
+    Future.delayed(Duration.zero).then((_) {
+      Provider.of<ProductProvider>(context, listen: false)
+          .fetchProducts()
+          .then((_) {
+        setState(() {
+          _isLoading = false;
         });
+      });
+      Provider.of<UserProvider>(context, listen: false).fetchUser().then((_) {
+        setState(() {
+          _isLoading = false;
+        });
+      });
+    });
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    //print(shopList[0]);
-    //var productProvider = Provider.of<ProductProvider>(context);
-    //var products = productProvider.getProducts();
-    //print(products);
-
-    //methana products tika array ekaka save wenawa
-    /*
-      me format eken 
-
-      products = [
-        {
-          name: ...,
-          imageUrl; ...,
-          price: ...,
-          description: ...,
-          category: ...
-        },
-        {
-          name: ...,
-          imageUrl; ...,
-          price: ...,
-          description: ...,
-          category: ...,
-        },
-      ];
-
-      isLoading eka true wenawa load weddi eka false da kiyala balala ita passe products array eken products render karanna. is loading true nan spinner ekak danna
-    */
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,

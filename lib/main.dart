@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hardwaremobile/providers/ProductProvider.dart';
+import 'package:hardwaremobile/providers/UserProvider.dart';
 import 'package:provider/provider.dart';
 
 import './screens/signin_screen.dart';
@@ -18,7 +19,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [ChangeNotifierProvider.value(value: ProductProvider())],
+      providers: [
+        ChangeNotifierProvider.value(value: ProductProvider()),
+        ChangeNotifierProvider.value(value: UserProvider()),
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: "Hardware-Mobile",

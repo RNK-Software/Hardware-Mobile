@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:hardwaremobile/shop/shop.dart';
@@ -25,8 +26,26 @@ class _SigninScreenState extends State<SigninScreen> {
           auth
               .signInWithCredential(authCredential)
               .then((AuthResult result) => {
-                    Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (context) => Shop()))
+                    Firestore.instance
+                        .collection('users')
+                        .where("phoneNumber",
+                            isEqualTo: _numberController.text.trim())
+                        .getDocuments()
+                        .then((document) {
+                      if (document.documents.length == 0) {
+                        Firestore.instance.collection('users').add({
+                          'phoneNumber': _numberController.text.trim(),
+                          'address': '',
+                          'name': ''
+                        }).then((value) {
+                          Navigator.pushReplacement(context,
+                              MaterialPageRoute(builder: (context) => Shop()));
+                        });
+                      } else {
+                        Navigator.pushReplacement(context,
+                            MaterialPageRoute(builder: (context) => Shop()));
+                      }
+                    })
                   })
               .catchError((e) {
             print(e);
