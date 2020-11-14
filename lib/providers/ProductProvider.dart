@@ -104,6 +104,16 @@ class ProductProvider with ChangeNotifier {
     return productList;
   }
 
+  List<String> getCategories() {
+    List<String> categories = [];
+    _products.forEach((product) {
+      if (!categories.contains(product.category)) {
+        categories.add(product.category);
+      }
+    });
+    return categories;
+  }
+
   List<CartItem> getCartItems() {
     return this._cartItems;
   }

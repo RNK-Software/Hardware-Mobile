@@ -106,7 +106,7 @@ class ShopView extends ProductViewModel {
                                   ? Theme.of(context).accentColor
                                   : Colors.grey[300],
                               onPressed: () => headerListChangePosition(index),
-                              child: Text("${productList[index].categoryName}"),
+                              child: Text("${categoryList[index]}"),
                             ),
                           ),
                         ),

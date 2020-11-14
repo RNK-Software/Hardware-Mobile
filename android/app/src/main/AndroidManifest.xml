@@ -1,8 +1,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.smartherd.hardwaremobile">
+    <uses-permission
+android:name="android.permission.ACCESS_FINE_LOCATION" />
+   <uses-permission
+android:name="android.permission.ACCESS_COARSE_LOCATION" />
    <application
         android:label="hardwaremobile"
         android:icon="@mipmap/ic_launcher">
+        <!--Google maps api key-->
+            <meta-data android:name="com.google.android.geo.API_KEY"
+               android:value="AIzaSyACGkWj26d4-Fomoi3MTNNBY0avWd3c-cQ"/>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
@@ -18,6 +25,8 @@
               android:name="io.flutter.embedding.android.NormalTheme"
               android:resource="@style/NormalTheme"
               />
+            
+          
             <!-- Displays an Android View that continues showing the launch screen
                  Drawable until Flutter paints its first frame, then this splash
                  screen fades out. A splash screen is useful to avoid any visual

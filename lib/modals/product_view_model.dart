@@ -13,11 +13,13 @@ abstract class ProductViewModel extends State<Shop> {
   ScrollController headerScrollController = ScrollController();
 
   List<ProductModel> productList = [];
+  List<String> categoryList = [];
 
   @override
   void didChangeDependencies() {
     var productProvider = Provider.of<ProductProvider>(context);
     productList = productProvider.getProducts();
+    categoryList = productProvider.getCategories();
     super.didChangeDependencies();
   }
 

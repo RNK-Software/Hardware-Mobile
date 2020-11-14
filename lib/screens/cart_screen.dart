@@ -117,9 +117,11 @@ class _CartScreenState extends State<CartScreen> {
                         'PLACE ORDER',
                         textScaleFactor: 1,
                       ),
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/order');
-                      },
+                      onPressed: cartItems.length > 0
+                          ? () {
+                              Navigator.pushNamed(context, '/order');
+                            }
+                          : null,
                     ),
                   ),
                 ),
