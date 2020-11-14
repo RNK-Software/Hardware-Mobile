@@ -1,11 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/widgets.dart';
+import 'package:hardwaremobile/modals/cartItem_model.dart';
 import 'package:hardwaremobile/modals/product.dart';
 import 'package:hardwaremobile/modals/product_model.dart';
 import 'package:hardwaremobile/shop/model/shop_model.dart';
 
 class ProductProvider with ChangeNotifier {
   List<ProductModal> _products = [];
+  List<CartItem> _cartItems = [];
 
   Future<void> fetchProducts() async {
     try {
@@ -100,5 +102,32 @@ class ProductProvider with ChangeNotifier {
     });
 
     return productList;
+  }
+
+  List<CartItem> getCartItems() {
+    return this._cartItems;
+  }
+
+  void setCartItems(CartItem item) {
+    bool isExistingItem = false;
+    this._cartItems.forEach((element) {
+      if (item.itemName == element.itemName) {
+        element.quantity = element.quantity + item.quantity;
+        isExistingItem = true;
+      }
+    });
+    if (!isExistingItem) {
+      this._cartItems.add(item);
+    }
+    notifyListeners();
+  }
+
+  void deleteCartItem(String name) {
+    this._cartItems.forEach((element) {
+      if (element.itemName == name) {
+        this._cartItems.remove(element);
+        notifyListeners();
+      }
+    });
   }
 }

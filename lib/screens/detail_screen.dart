@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:hardwaremobile/modals/cartItem_model.dart';
 import 'package:hardwaremobile/providers/ProductProvider.dart';
 import 'package:provider/provider.dart';
-
-int _n = 0;
 
 class DetailScreen extends StatefulWidget {
   @override
@@ -11,6 +10,15 @@ class DetailScreen extends StatefulWidget {
 }
 
 class _DetailScreenState extends State<DetailScreen> {
+  int _n = 0;
+
+  void addtoCartHandler(ProductProvider productProvider, String productName,
+      String productPrice, int productQuantity) {
+    CartItem item = new CartItem(
+        itemName: productName, price: productPrice, quantity: productQuantity);
+    productProvider.setCartItems(item);
+  }
+
   @override
   Widget build(BuildContext context) {
     var _mediaQueryData = MediaQuery.of(context);
@@ -131,9 +139,12 @@ class _DetailScreenState extends State<DetailScreen> {
                           '+ ADD TO CART',
                           textScaleFactor: 1.3,
                         ),
-                        onPressed: () {
-                          //Cart
-                        },
+                        onPressed: _n > 0
+                            ? () {
+                                this.addtoCartHandler(
+                                    productProvider, name, product.price, _n);
+                              }
+                            : null,
                       ),
                     ),
                   ),
